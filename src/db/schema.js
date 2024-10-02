@@ -1,7 +1,7 @@
 import { pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core'
 
 /* Schema definition */
-export const userTable = pgTable('users', {
+export const customerTable = pgTable('customers', {
   id: uuid('id').primaryKey().defaultRandom().unique(),
   email: varchar('email', { length: 256 }).notNull().unique(),
   password: varchar('password', { length: 256 }).notNull(),

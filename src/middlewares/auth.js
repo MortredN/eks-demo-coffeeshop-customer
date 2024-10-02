@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { eq } from 'drizzle-orm'
 import db from '../db/index.js'
-import { userTable } from '../db/schema.js'
+import { customerTable } from '../db/schema.js'
 
 export const authenticateToken = async (req, res, next) => {
   if (!process.env.JWT_ACCESS_SECRET) {
@@ -14,9 +14,13 @@ export const authenticateToken = async (req, res, next) => {
 
   try {
     const { email } = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET)
-    const [user] = await db.select().from(userTable).where(eq(userTable.email, email)).limit(1)
+    const [customer] = await db
+      .select()
+      .from(customerTable)
+      .where(eq(customerTable.email, email))
+      .limit(1)
 
-    req.user = user
+    req.customer = customer
   } catch (err) {
     if (err instanceof jwt.TokenExpiredError) {
       res.sendStatus(401)

@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import 'dotenv/config'
 
-import routerCustomer from './api/customer.js'
+import routerAuth from './api/auth.js'
 
 const app = express()
 const PORT = process.env.PORT || 4001
@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4001
 app.use(bodyParser.json())
 app.use(cors())
 
-app.use('/', routerCustomer)
+app.use('/auth', routerAuth)
 
 app
   .listen(PORT, () => {

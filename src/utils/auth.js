@@ -1,17 +1,33 @@
 import jwt from 'jsonwebtoken'
 
-export const generateAccessToken = ({ email }) => {
+export const generateAccessToken = (customer) => {
   if (!process.env.JWT_ACCESS_SECRET) {
     throw new Error('Cannot create token')
   }
-  return jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, { expiresIn: '1h' })
+  return jwt.sign(
+    {
+      id: customer.id,
+      email: customer.email,
+      name: customer.name
+    },
+    process.env.JWT_ACCESS_SECRET,
+    { expiresIn: '1h' }
+  )
 }
 
-export const generateRefreshToken = ({ email }) => {
+export const generateRefreshToken = (customer) => {
   if (!process.env.JWT_REFRESH_SECRET) {
     throw new Error('Cannot create token')
   }
-  return jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, { expiresIn: '1y' })
+  return jwt.sign(
+    {
+      id: customer.id,
+      email: customer.email,
+      name: customer.name
+    },
+    process.env.JWT_REFRESH_SECRET,
+    { expiresIn: '1y' }
+  )
 }
 
 export const verifyRefreshToken = async (refreshToken) => {
@@ -21,6 +37,6 @@ export const verifyRefreshToken = async (refreshToken) => {
   if (!refreshToken) {
     throw new Error('No refresh token')
   }
-  const { email } = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET)
-  return email
+  const customer = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET)
+  return customer
 }
