@@ -22,9 +22,7 @@ export const authenticateToken = async (req, res, next) => {
 
     req.customer = customer
   } catch (err) {
-    if (err instanceof jwt.TokenExpiredError) {
-      res.sendStatus(401)
-    }
+    res.sendStatus(401)
   }
   next()
 }

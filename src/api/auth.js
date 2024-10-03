@@ -85,7 +85,7 @@ router.post('/refresh-token', async (req, res) => {
     await db.select().from(customerTable).where(eq(customerTable.email, email)).limit(1)
   )[0]
   if (!customer) {
-    return res.status(400).json({ message: 'Token invalid' })
+    return res.status(401).json({ message: 'Token invalid' })
   }
 
   const newAccessToken = generateAccessToken(customer)
