@@ -5,7 +5,6 @@ import { eq } from 'drizzle-orm'
 import db from '../db/index.js'
 import { customerTable } from '../db/schema.js'
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/auth.js'
-import { authenticateToken } from '../middlewares/auth.js'
 
 const router = express.Router()
 
