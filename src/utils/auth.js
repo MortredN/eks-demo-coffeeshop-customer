@@ -11,7 +11,7 @@ export const generateAccessToken = (customer) => {
       name: customer.name
     },
     process.env.JWT_ACCESS_SECRET,
-    { expiresIn: '1h' }
+    { expiresIn: '1y' }
   )
 }
 
