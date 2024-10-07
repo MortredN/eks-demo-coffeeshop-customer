@@ -8,7 +8,7 @@ import routerAuth from './api/auth.js'
 import routerMe from './api/me.js'
 
 const app = express()
-const PORT = process.env.PORT || 4001
+const PORT = 4000
 
 app.use(bodyParser.json())
 app.use(cors())
