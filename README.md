@@ -53,7 +53,7 @@ docker build -t eks-demo-coffeeshop-customer:latest .
 
 
 # Run the container
-docker run --name eks-demo-coffeeshop-shopping
+docker run --name eks-demo-coffeeshop-customer
 -p 4001:4000 \
 -e DB_USERNAME=username \
 -e DB_PASSWORD=password \
@@ -62,7 +62,7 @@ docker run --name eks-demo-coffeeshop-shopping
 -e DB_DBNAME=database_customer \
 -e JWT_ACCESS_SECRET=random_secret_1 \
 -e JWT_REFRESH_SECRET=random_secret_2 \
--d eks-demo-coffeeshop-shopping:latest
+-d eks-demo-coffeeshop-customer:latest
 
 # Or run using DB_URL env
 docker run --name eks-demo-coffeeshop-customer
