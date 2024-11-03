@@ -14,8 +14,18 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(morgan('tiny'))
 
-app.use('/auth', routerAuth)
-app.use('/me', routerMe)
+// Health check
+app.get('/', async (req, res) => {
+  return res.status(200).json({ success: true })
+})
+
+const router = express.Router()
+
+router.use('/auth', routerAuth)
+router.use('/me', routerMe)
+
+// AWS ALB does not support path rewrite
+app.use('/api/customer', router)
 
 app
   .listen(PORT, () => {
